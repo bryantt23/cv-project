@@ -9,8 +9,10 @@ class Job extends Component {
   render() {
     return (
       <div>
-        <h3>Add Job</h3>
-        <button onClick={() => this.props.addNewJob()}>Add this new job</button>
+        <h3>{this.props.message}</h3>
+        <button onClick={() => this.props.addNewJob()}>
+          {this.props.message}
+        </button>
         <EditableLabel
           value={this.props.companyName}
           changeHandler={this.props.changeHandler('companyName')}

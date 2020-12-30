@@ -9,7 +9,8 @@ class WorkExperience extends Component {
       addNewJob: false,
       companyName: 'Add Company Name Here',
       title: 'Add Job Title Here',
-      location: 'Add Location Here'
+      location: 'Add Location Here',
+      editingJob: false
     };
     this.changeHandler = this.changeHandler.bind(this);
   }
@@ -41,11 +42,18 @@ then edit stuff workigng
     const newJob = { title, companyName, location };
     const newArray = [...this.props.workExperience, newJob];
     this.props.changeHandler('workExperience', newArray);
+    this.setState({ editingJob: false });
   };
 
   //for edit put last element into state, delete last element, & then call addNewJob
-
-  // editJob;
+  editJob = () => {
+    const workExperience = this.props.workExperience;
+    const len = workExperience.length;
+    const { title, companyName, location } = workExperience[len - 1];
+    this.setState({ title, companyName, location });
+    this.deleteFromArray(len - 1);
+    this.setState({ editingJob: true, addNewJob: true });
+  };
 
   render() {
     const len = this.props.workExperience.length;
@@ -71,7 +79,7 @@ then edit stuff workigng
     }
 
     const { companyName, title, location } = this.state;
-
+    const message = this.state.editingJob ? 'Edit job' : 'Add job';
     return (
       <div>
         <h3>Work Experience</h3>
@@ -93,6 +101,7 @@ then edit stuff workigng
             location={location}
             changeHandler={() => this.changeHandler}
             addNewJob={() => this.addNewJob()}
+            message={message}
           />
         ) : (
           ''
