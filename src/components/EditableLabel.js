@@ -11,22 +11,41 @@ class EditableLabel extends Component {
     this.initEditor();
     this.edit = this.edit.bind(this);
     this.save = this.save.bind(this);
+    this.cancel = this.cancel.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  cancel() {
+    this.setState({
+      editing: false,
+      text: this.props.value
+    });
   }
 
   initEditor() {
     this.editor = (
-      <input
-        type='text'
-        defaultValue={this.state.text}
-        onKeyPress={event => {
-          const key = event.which || event.keyCode;
-          if (key === 13) {
-            //enter key
-            this.save(event.target.value);
-          }
-        }}
-        autoFocus={true}
-      />
+      <div>
+        {this.props.labelName}:{' '}
+        <input
+          type='text'
+          defaultValue={this.state.text}
+          onChange={e => this.handleChange(e)}
+          onKeyPress={event => {
+            const key = event.which || event.keyCode;
+            if (key === 13) {
+              //enter key
+              this.save(event.target.value);
+            }
+          }}
+          autoFocus={true}
+        />
+        <button onClick={() => this.save(this.state.text)}>Save Changes</button>{' '}
+        <button onClick={() => this.cancel()}>Cancel</button>
+      </div>
     );
   }
 
@@ -53,7 +72,10 @@ class EditableLabel extends Component {
     return this.state.editing ? (
       this.editor
     ) : (
-      <p onClick={this.edit}>{this.state.text}</p>
+      <p onClick={this.edit}>
+        {this.props.labelName}: {this.state.text}
+        <button>Edit</button>
+      </p>
     );
   }
 }
