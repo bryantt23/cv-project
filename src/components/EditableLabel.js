@@ -42,6 +42,7 @@ class EditableLabel extends Component {
       text: value,
       editing: false
     });
+    this.props.changeHandler(this.props.keyName, value);
   }
 
   componentDidUpdate() {
