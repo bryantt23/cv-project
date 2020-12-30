@@ -33,18 +33,19 @@ then edit stuff workigng
   }
 
   showAddWorkExperienceForm() {
-    console.log('c');
     this.setState({ addNewJob: true });
-    console.log(this.state);
   }
 
   addNewJob = () => {
-    console.log('addNewJob');
     const { title, companyName, location } = this.state;
     const newJob = { title, companyName, location };
     const newArray = [...this.props.workExperience, newJob];
     this.props.changeHandler('workExperience', newArray);
   };
+
+  //for edit put last element into state, delete last element, & then call addNewJob
+
+  // editJob;
 
   render() {
     const len = this.props.workExperience.length;
@@ -55,7 +56,7 @@ then edit stuff workigng
         workExperienceArr.push(
           <p key={i}>
             Company Name: {job.companyName}, Title: {job.title}, Location:{' '}
-            {job.location} <button>Edit</button>
+            {job.location} <button onClick={() => this.editJob()}>Edit</button>
           </p>
         );
       } else {
