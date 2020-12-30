@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import EditableLabel from './EditableLabel';
+import Job from './Job';
 
 class WorkExperience extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showJob: false,
+      companyName: 'Add Company Name Here',
+      title: 'Add Job Title Here',
+      location: 'Add Location Here'
+    };
+    this.changeHandler = this.changeHandler.bind(this);
   }
   /*
 plan
@@ -13,10 +21,20 @@ get delete working
 then edit stuff workigng
 
 */
+
+  changeHandler(key, value) {
+    this.setState({ [key]: value }, () => console.log(this.state));
+  }
+
   deleteFromArray(index) {
-    console.log(index);
     const newArray = this.props.workExperience.splice(index, 1);
     this.props.changeHandler('workExperience', newArray);
+  }
+
+  addWorkExperience() {
+    console.log('c');
+    this.setState({ showJob: true });
+    console.log(this.state);
   }
 
   render() {
@@ -26,41 +44,42 @@ then edit stuff workigng
       let job = this.props.workExperience[i];
       if (i === len - 1) {
         workExperienceArr.push(
-          <p>
-            {job.companyName} {job.location} {job.title} <button>Edit</button>
+          <p key={i}>
+            Company Name: {job.companyName}, Title: {job.title}, Location:{' '}
+            {job.location} <button>Edit</button>
           </p>
         );
       } else {
         workExperienceArr.push(
-          <p>
-            {job.companyName} {job.location} {job.title}{' '}
+          <p key={i}>
+            Company Name: {job.companyName}, Title: {job.title}, Location:{' '}
+            {job.location}{' '}
             <button onClick={() => this.deleteFromArray(i)}>Delete</button>
           </p>
         );
       }
     }
 
+    const { companyName, title, location } = this.state;
+
     return (
       <div>
         <h3>Work Experience</h3>
+        <button onClick={() => this.addWorkExperience()}>
+          Add work experience
+        </button>
         {workExperienceArr}
-        {/* <p>{JSON.stringify(this.props.workExperience)}</p> */}
+        {this.state.showJob ? (
+          <Job
+            companyName={companyName}
+            title={title}
+            location={location}
+            changeHandler={() => this.changeHandler}
+          />
+        ) : (
+          ''
+        )}
       </div>
-      //   <div>
-      //     <h3>Personal Info</h3>
-      //     <EditableLabel
-      //       value={this.props.name}
-      //       changeHandler={this.props.changeHandler}
-      //       keyName='name'
-      //       labelName='Name'
-      //     />
-      //     <EditableLabel
-      //       value={this.props.city}
-      //       changeHandler={this.props.changeHandler}
-      //       keyName='city'
-      //       labelName='City'
-      //     />
-      //   </div>
     );
   }
 }

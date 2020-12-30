@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PersonalInfo from './components/PersonalInfo';
-import WorkExperience from './components/WorkExperience';
+import WorkExperiences from './components/WorkExperience';
 
 const appState = {
   name: 'John Does',
@@ -52,12 +52,7 @@ class App extends Component {
   // just going to brute force and pass entire object to every child
   // This method will be sent to the child component
   changeHandler(key, value) {
-    // if (key === 'name') {
     this.setState({ [key]: value });
-    // this.setState({
-    //   {...this.state, {...personalInfo={name: value}}}
-    // })
-    // }
   }
 
   render() {
@@ -71,7 +66,7 @@ class App extends Component {
           city={city}
           changeHandler={this.changeHandler}
         />
-        <WorkExperience
+        <WorkExperiences
           workExperience={workExperience}
           changeHandler={() => this.changeHandler()}
         />
