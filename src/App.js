@@ -1,5 +1,6 @@
-import PersonalInfo from './components/PersonalInfo';
 import React, { Component } from 'react';
+import PersonalInfo from './components/PersonalInfo';
+import WorkExperience from './components/WorkExperience';
 
 const appState = {
   name: 'John Does',
@@ -60,7 +61,7 @@ class App extends Component {
   }
 
   render() {
-    const { name, city } = this.state;
+    const { name, city, workExperience } = this.state;
     return (
       <div>
         <h1>CV Application</h1>
@@ -70,6 +71,7 @@ class App extends Component {
           city={city}
           changeHandler={this.changeHandler}
         />
+        <WorkExperience workExperience={workExperience} />
       </div>
     );
   }

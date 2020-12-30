@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import EditableLabel from './EditableLabel';
 
 class PersonalInfo extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   name: this.props.name
-    // };
-  }
-
   render() {
     return (
       <div>
