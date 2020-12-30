@@ -9,18 +9,29 @@ make the last one editable but the ones before that only deletable
 */
 
   render() {
-    const workExperienceMap = this.props.workExperience.map(job => {
-      return (
-        <p>
-          {job.companyName} {job.location} {job.title}
-        </p>
-      );
-    });
+    const len = this.props.workExperience.length;
+    const workExperienceArr = [];
+    for (let i = 0; i < len; i++) {
+      let job = this.props.workExperience[i];
+      if (i === len - 1) {
+        workExperienceArr.push(
+          <p>
+            {job.companyName} {job.location} {job.title} <button>Edit</button>
+          </p>
+        );
+      } else {
+        workExperienceArr.push(
+          <p>
+            {job.companyName} {job.location} {job.title} <button>Delete</button>
+          </p>
+        );
+      }
+    }
 
     return (
       <div>
         <h3>Work Experience</h3>
-        {workExperienceMap}
+        {workExperienceArr}
         {/* <p>{JSON.stringify(this.props.workExperience)}</p> */}
       </div>
       //   <div>
