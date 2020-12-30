@@ -6,7 +6,7 @@ class WorkExperience extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showJob: false,
+      addNewJob: false,
       companyName: 'Add Company Name Here',
       title: 'Add Job Title Here',
       location: 'Add Location Here'
@@ -27,13 +27,14 @@ then edit stuff workigng
   }
 
   deleteFromArray(index) {
-    const newArray = this.props.workExperience.splice(index, 1);
-    this.props.changeHandler('workExperience', newArray);
+    let arrayCopy = [...this.props.workExperience];
+    arrayCopy.splice(index, 1);
+    this.props.changeHandler('workExperience', arrayCopy);
   }
 
   showAddWorkExperienceForm() {
     console.log('c');
-    this.setState({ showJob: true });
+    this.setState({ addNewJob: true });
     console.log(this.state);
   }
 
@@ -73,18 +74,18 @@ then edit stuff workigng
     return (
       <div>
         <h3>Work Experience</h3>
-        {this.state.showJob && (
-          <button onClick={() => this.setState({ showJob: false })}>
+        {this.state.addNewJob && (
+          <button onClick={() => this.setState({ addNewJob: false })}>
             Show all jobs
           </button>
         )}
-        {!this.state.showJob && (
+        {!this.state.addNewJob && (
           <button onClick={() => this.showAddWorkExperienceForm()}>
             Add work experience
           </button>
         )}
-        {!this.state.showJob && workExperienceArr}
-        {this.state.showJob ? (
+        {!this.state.addNewJob && workExperienceArr}
+        {this.state.addNewJob ? (
           <Job
             companyName={companyName}
             title={title}
