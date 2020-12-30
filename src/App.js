@@ -68,7 +68,7 @@ class App extends Component {
         />
         <WorkExperiences
           workExperience={workExperience}
-          changeHandler={() => this.changeHandler()}
+          changeHandler={this.changeHandler}
         />
       </div>
     );

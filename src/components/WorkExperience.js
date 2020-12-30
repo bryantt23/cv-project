@@ -31,11 +31,19 @@ then edit stuff workigng
     this.props.changeHandler('workExperience', newArray);
   }
 
-  addWorkExperience() {
+  showAddWorkExperienceForm() {
     console.log('c');
     this.setState({ showJob: true });
     console.log(this.state);
   }
+
+  addNewJob = () => {
+    console.log('addNewJob');
+    const { title, companyName, location } = this.state;
+    const newJob = { title, companyName, location };
+    const newArray = [...this.props.workExperience, newJob];
+    this.props.changeHandler('workExperience', newArray);
+  };
 
   render() {
     const len = this.props.workExperience.length;
@@ -65,16 +73,24 @@ then edit stuff workigng
     return (
       <div>
         <h3>Work Experience</h3>
-        <button onClick={() => this.addWorkExperience()}>
-          Add work experience
-        </button>
-        {workExperienceArr}
+        {this.state.showJob && (
+          <button onClick={() => this.setState({ showJob: false })}>
+            Show all jobs
+          </button>
+        )}
+        {!this.state.showJob && (
+          <button onClick={() => this.showAddWorkExperienceForm()}>
+            Add work experience
+          </button>
+        )}
+        {!this.state.showJob && workExperienceArr}
         {this.state.showJob ? (
           <Job
             companyName={companyName}
             title={title}
             location={location}
             changeHandler={() => this.changeHandler}
+            addNewJob={() => this.addNewJob()}
           />
         ) : (
           ''
