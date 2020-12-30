@@ -71,7 +71,10 @@ class App extends Component {
           city={city}
           changeHandler={this.changeHandler}
         />
-        <WorkExperience workExperience={workExperience} />
+        <WorkExperience
+          workExperience={workExperience}
+          changeHandler={() => this.changeHandler()}
+        />
       </div>
     );
   }

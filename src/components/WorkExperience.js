@@ -2,11 +2,22 @@ import React, { Component } from 'react';
 import EditableLabel from './EditableLabel';
 
 class WorkExperience extends Component {
+  constructor(props) {
+    super(props);
+  }
   /*
 plan
 map through it and get all to render
 make the last one editable but the ones before that only deletable
+get delete working
+then edit stuff workigng
+
 */
+  deleteFromArray(index) {
+    console.log(index);
+    const newArray = this.props.workExperience.splice(index, 1);
+    this.props.changeHandler('workExperience', newArray);
+  }
 
   render() {
     const len = this.props.workExperience.length;
@@ -22,7 +33,8 @@ make the last one editable but the ones before that only deletable
       } else {
         workExperienceArr.push(
           <p>
-            {job.companyName} {job.location} {job.title} <button>Delete</button>
+            {job.companyName} {job.location} {job.title}{' '}
+            <button onClick={() => this.deleteFromArray(i)}>Delete</button>
           </p>
         );
       }
