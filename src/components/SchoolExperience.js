@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Job from './Job';
+import School from './School';
 
-class WorkExperience extends Component {
+class SchoolExperience extends Component {
   constructor(props) {
     super(props);
     this.state = {
       addNewJob: false,
-      companyName: 'Add Company Name Here',
-      title: 'Add Job Title Here',
+      name: 'Add School Name Here',
+      courseOfStudy: 'Add Course of Study Here',
       location: 'Add Location Here',
       editingJob: false
     };
@@ -29,8 +29,8 @@ class WorkExperience extends Component {
   }
 
   addNewJob = () => {
-    const { title, companyName, location } = this.state;
-    const newJob = { title, companyName, location };
+    const { courseOfStudy, name, location } = this.state;
+    const newJob = { courseOfStudy, name, location };
     const newArray = [...this.props.experience, newJob];
     this.props.changeHandler(this.props.arrayName, newArray);
     this.setState({ editingJob: false });
@@ -40,8 +40,8 @@ class WorkExperience extends Component {
   editJob = () => {
     const experience = this.props.experience;
     const len = experience.length;
-    const { title, companyName, location } = experience[len - 1];
-    this.setState({ title, companyName, location });
+    const { courseOfStudy, name, location } = experience[len - 1];
+    this.setState({ courseOfStudy, name, location });
     this.deleteFromArray(len - 1);
     this.setState({ editingJob: true, addNewJob: true });
   };
@@ -54,15 +54,16 @@ class WorkExperience extends Component {
       if (i === len - 1) {
         experienceArr.push(
           <p key={i}>
-            Company Name: {job.companyName}, Title: {job.title}, Location:{' '}
-            {job.location} <button onClick={() => this.editJob()}>Edit</button>
+            School Name: {job.name}, Course of Study: {job.courseOfStudy},
+            Location: {job.location}{' '}
+            <button onClick={() => this.editJob()}>Edit</button>
           </p>
         );
       } else {
         experienceArr.push(
           <p key={i}>
-            Company Name: {job.companyName}, Title: {job.title}, Location:{' '}
-            {job.location}{' '}
+            School Name: {job.name}, Course of Study: {job.courseOfStudy},
+            Location: {job.location}{' '}
             <button onClick={() => this.deleteFromArray(i)}>Delete</button>
           </p>
         );
@@ -70,7 +71,7 @@ class WorkExperience extends Component {
     }
 
     const experienceType = this.props.experienceType;
-    const { companyName, title, location } = this.state;
+    const { name, courseOfStudy, location } = this.state;
     const message = this.state.editingJob
       ? `Edit ${experienceType}`
       : `Add ${experienceType}`;
@@ -89,9 +90,9 @@ class WorkExperience extends Component {
         )}
         {!this.state.addNewJob && experienceArr}
         {this.state.addNewJob ? (
-          <Job
-            companyName={companyName}
-            title={title}
+          <School
+            name={name}
+            courseOfStudy={courseOfStudy}
             location={location}
             changeHandler={() => this.changeHandler}
             addNewJob={() => this.addNewJob()}
@@ -105,4 +106,4 @@ class WorkExperience extends Component {
   }
 }
 
-export default WorkExperience;
+export default SchoolExperience;

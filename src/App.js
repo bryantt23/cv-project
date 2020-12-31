@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import PersonalInfo from './components/PersonalInfo';
 import WorkExperiences from './components/WorkExperience';
+import SchoolExperiences from './components/SchoolExperience';
 
 const appState = {
   name: 'John Does',
   city: 'San Francisco',
-  schoolInfo: [
+  schoolExperience: [
     {
-      schoolName: 'USC',
+      name: 'USC',
       location: 'Los Angeles',
       courseOfStudy: 'English'
     },
     {
-      schoolName: 'The Odin Project',
+      name: 'The Odin Project',
       location: 'Online',
       courseOfStudy: 'Web development'
     }
@@ -56,7 +57,7 @@ class App extends Component {
   }
 
   render() {
-    const { name, city, workExperience } = this.state;
+    const { name, city, workExperience, schoolExperience } = this.state;
     return (
       <div>
         <h1>CV Application</h1>
@@ -67,8 +68,16 @@ class App extends Component {
           changeHandler={this.changeHandler}
         />
         <WorkExperiences
-          workExperience={workExperience}
+          arrayName='workExperience'
+          experience={workExperience}
           changeHandler={this.changeHandler}
+          experienceType='Work'
+        />
+        <SchoolExperiences
+          arrayName='schoolExperience'
+          experience={schoolExperience}
+          changeHandler={this.changeHandler}
+          experienceType='School'
         />
       </div>
     );
