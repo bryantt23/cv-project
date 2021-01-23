@@ -1,5 +1,7 @@
 # https://bryantt23.github.io/cv-project/
 
+https://www.theodinproject.com/courses/javascript/lessons/cv-application
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
